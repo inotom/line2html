@@ -1,7 +1,7 @@
 "
 " File: plugin/line2html.vim
 " file created in 2014/08/23 09:27:58.
-" LastUpdated:2014/08/29 10:02:39.
+" LastUpdated:2014/08/29 11:43:42.
 " Author: iNo <wdf7322@yahoo.co.jp>
 " Version: 1.1
 " License: MIT License {{{
@@ -35,21 +35,23 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-if !exists('g:line2html_enable_parent_tag')
-  let g:line2html_enable_parent_tag = 1
-endif
-
 " convert line to <table>
-command! -range Line2table :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'table')
+command! -range Line2table :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'table', 1)
+command! -range Line2tr :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'table', 0)
 
 " convert line to <ul>
-command! -range Line2ul :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'ul')
+command! -range Line2ul :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'ul', 1)
 
 " convert line to <ol>
-command! -range Line2ol :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'ol')
+command! -range Line2ol :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'ol', 1)
+
+" convert line to <li>
+command! -range Line2li :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'ul', 0)
 
 " convert line to <dl>
-command! -range Line2dl :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'dl')
+command! -range Line2dl :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'dl', 1)
+command! -range Line2dt :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'dl', 0)
+command! -range Line2dd :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'dl', 0)
 
 
 let &cpo = s:save_cpo

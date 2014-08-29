@@ -1,7 +1,7 @@
 "
 " File: autoload/line2html.vim
 " file created in 2014/08/24 06:39:21.
-" LastUpdated:2014/08/24 07:37:33.
+" LastUpdated:2014/08/29 11:35:56.
 " Author: iNo <wdf7322@yahoo.co.jp>
 " Version: 1.0
 " License: MIT License {{{
@@ -36,15 +36,15 @@ function! line2html#deleteLines(l1, l2)
   silent execute (a:l1 + 1) . "," . a:l2 . "delete"
 endfunction
 
-function! line2html#makeHtml(l1, l2, type) range
+function! line2html#makeHtml(l1, l2, type, hasGroup) range
   let htmlStr = ''
 
   if a:type ==# 'table'
-    let htmlStr = line2html#table#getHtml(a:l1, a:l2)
+    let htmlStr = line2html#table#getHtml(a:l1, a:l2, a:hasGroup)
   elseif a:type ==# 'ul' || a:type ==# 'ol'
-    let htmlStr = line2html#li#getHtml(a:l1, a:l2, a:type)
+    let htmlStr = line2html#li#getHtml(a:l1, a:l2, a:type, a:hasGroup)
   elseif a:type ==# 'dl'
-    let htmlStr = line2html#dl#getHtml(a:l1, a:l2)
+    let htmlStr = line2html#dl#getHtml(a:l1, a:l2, a:hasGroup)
   endif
 
   " データ行を削除する

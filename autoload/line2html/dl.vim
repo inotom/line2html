@@ -1,7 +1,7 @@
 "
 " File: autoload/line2html/dl.vim
 " file created in 2014/08/24 07:16:38.
-" LastUpdated:2014/08/29 10:03:04.
+" LastUpdated:2014/08/29 11:38:41.
 " Author: iNo <wdf7322@yahoo.co.jp>
 " Version: 1.1
 " License: MIT License {{{
@@ -33,10 +33,10 @@ set cpo&vim
 " dt または dd タグの識別用変数
 let s:tagType = 0
 
-function! s:getNewLine(l1, l2, currentLine)
+function! s:getNewLine(l1, l2, currentLine, hasGroup)
   let newLine = ''
 
-  if (a:l1 == a:currentLine && g:line2html_enable_parent_tag)
+  if (a:l1 == a:currentLine && a:hasGroup)
     let newLine .= "<dl>\n"
   endif
 
@@ -51,19 +51,19 @@ function! s:getNewLine(l1, l2, currentLine)
     let newLine .= "<" . dlTag . ">" . substitute(line, '\v\s+$', '', '') . "</" . dlTag . ">\n"
   endif
 
-  if (a:l2 == a:currentLine && g:line2html_enable_parent_tag)
+  if (a:l2 == a:currentLine && a:hasGroup)
     let newLine .= "</dl>\n"
   endif
 
   return newLine
 endfunction
 
-function! line2html#dl#getHtml(l1, l2)
+function! line2html#dl#getHtml(l1, l2, hasGroup)
   let line = ''
   let i = a:l1
   let s:tagType = i % 2
   while i <= a:l2
-    let line .= s:getNewLine(a:l1, a:l2, i)
+    let line .= s:getNewLine(a:l1, a:l2, i, a:hasGroup)
     let i += 1
   endwhile
   return line

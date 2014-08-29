@@ -1,7 +1,7 @@
 "
 " File: autoload/line2html/li.vim
 " file created in 2014/08/24 07:15:26.
-" LastUpdated:2014/08/29 10:02:54.
+" LastUpdated:2014/08/29 11:38:08.
 " Author: iNo <wdf7322@yahoo.co.jp>
 " Version: 1.1
 " License: MIT License {{{
@@ -32,10 +32,10 @@ set cpo&vim
 
 let s:listTag = "ul"
 
-function! s:getNewLine(l1, l2, currentLine)
+function! s:getNewLine(l1, l2, currentLine, hasGroup)
   let newLine = ''
 
-  if (a:l1 == a:currentLine && g:line2html_enable_parent_tag)
+  if (a:l1 == a:currentLine && a:hasGroup)
     let newLine .= "<" . s:listTag . ">\n"
   endif
 
@@ -44,19 +44,19 @@ function! s:getNewLine(l1, l2, currentLine)
     let newLine .= "<li>" . substitute(line, '\v\s+$', '', '') . "</li>\n"
   endif
 
-  if (a:l2 == a:currentLine && g:line2html_enable_parent_tag)
+  if (a:l2 == a:currentLine && a:hasGroup)
     let newLine .= "</" . s:listTag . ">\n"
   endif
 
   return newLine
 endfunction
 
-function! line2html#li#getHtml(l1, l2, tagType)
+function! line2html#li#getHtml(l1, l2, tagType, hasGroup)
   let s:listTag = a:tagType
   let line = ''
   let i = a:l1
   while i <= a:l2
-    let line .= s:getNewLine(a:l1, a:l2, i)
+    let line .= s:getNewLine(a:l1, a:l2, i, a:hasGroup)
     let i += 1
   endwhile
   return line

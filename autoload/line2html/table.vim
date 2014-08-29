@@ -1,7 +1,7 @@
 "
 " File: autoload/line2html/table.vim
 " file created in 2014/08/24 06:52:07.
-" LastUpdated:2014/08/29 10:02:59.
+" LastUpdated:2014/08/29 11:37:08.
 " Author: iNo <wdf7322@yahoo.co.jp>
 " Version: 1.1
 " License: MIT License {{{
@@ -30,11 +30,11 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 
-function! s:getNewLine(l1, l2, currentLine)
+function! s:getNewLine(l1, l2, currentLine, hasGroup)
   let newLine = ''
 
-  let parent_start_tag = g:line2html_enable_parent_tag ? "<table>\n<tbody>\n" : ""
-  let parent_ent_tag = g:line2html_enable_parent_tag ? "</tbody>\n</table>\n" : ""
+  let parent_start_tag = a:hasGroup ? "<table>\n<tbody>\n" : ""
+  let parent_ent_tag = a:hasGroup ? "</tbody>\n</table>\n" : ""
 
   if (a:l1 == a:currentLine)
     let newLine .= parent_start_tag . "<tr>\n"
@@ -54,11 +54,11 @@ function! s:getNewLine(l1, l2, currentLine)
   return newLine
 endfunction
 
-function! line2html#table#getHtml(l1, l2)
+function! line2html#table#getHtml(l1, l2, hasGroup)
   let line = ''
   let i = a:l1
   while i <= a:l2
-    let line .= s:getNewLine(a:l1, a:l2, i)
+    let line .= s:getNewLine(a:l1, a:l2, i, a:hasGroup)
     let i += 1
   endwhile
   return line

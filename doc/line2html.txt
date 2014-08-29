@@ -27,8 +27,6 @@ CONTENTS	*line2html-contents*
 
 Usage	|line2html-usage|
 Install	|line2html-install|
-Options	|line2html-options|
-	Enable parent tag	|line2html-enable-parent-tag|
 Changelog	|line2html-changelog|
 
 ==================================================
@@ -37,6 +35,12 @@ USAGE	*line2html-usage*
 :line2table
 
 To create a <table> tag enclosed in <tr> tag from selected line.
+It can be divided in the <tr> tag by interject a blank line.
+
+--------------------------------------------------
+:line2tr
+
+To create a <tr> tag from selected line.
 It can be divided in the <tr> tag by interject a blank line.
 
 --------------------------------------------------
@@ -50,9 +54,20 @@ To create a <ul> tag enclosed in <li> tag from selected line.
 To create a <ol> tag enclosed in <li> tag from selected line.
 
 --------------------------------------------------
+:line2li
+
+To create a <li> tag from selected line.
+
+--------------------------------------------------
 :line2dl
 
 To create a <dl> tag enclosed in <dt> and <dd> tag from selected line.
+
+--------------------------------------------------
+:line2dt
+:line2dd
+
+To create a <dt> and <dd> tag from selected line.
 
 
 ==================================================
@@ -62,19 +77,10 @@ Put this file into $HOME/.vim/plugin directory. Add these settings into .vimrc f
 
 
 ==================================================
-OPTIONS	*line2html-options*
-
---------------------------------------------------
-g:line2html_enable_parent_tag	*line2html-enable-parent-tag*
-
-Insert tag with <table>, <ul>, <ol>, <dl> tag. 0: not insert, 1: insert (default)
-
-
-==================================================
 CHANGELOG	*line2html-changelog*
 
 2014/08/29
-- Adding g:line2html_enable_parent_tag option.
+- Adding line2tr, line2li, line2dt, line2dd commands.
 
 2014/08/24
 - First release.
