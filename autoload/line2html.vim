@@ -1,7 +1,7 @@
 "
 " File: autoload/line2html.vim
 " file created in 2014/08/24 06:39:21.
-" LastUpdated:2014/08/29 11:35:56.
+" LastUpdated:2014/08/29 13:21:06.
 " Author: iNo <wdf7322@yahoo.co.jp>
 " Version: 1.0
 " License: MIT License {{{
@@ -51,7 +51,11 @@ function! line2html#makeHtml(l1, l2, type, hasGroup) range
   call line2html#deleteLines(a:l1, a:l2)
 
   " 改行コード \n を正常に出力するために split を使用してリストを渡す
-  call append(a:l1, split(htmlStr, "\n"))
+  let newLines = split(htmlStr, "\n")
+  call append(a:l1, newLines)
+
+  " 挿入したタグの範囲をインデントする
+  silent! execute(":normal " . a:l1 . "gg=" . (a:l1 + len(newLines)) . "gg")
 endfunction
 
 
