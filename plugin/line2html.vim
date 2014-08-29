@@ -1,9 +1,9 @@
 "
 " File: plugin/line2html.vim
 " file created in 2014/08/23 09:27:58.
-" LastUpdated:2014/08/24 07:10:45.
+" LastUpdated:2014/08/29 10:02:39.
 " Author: iNo <wdf7322@yahoo.co.jp>
-" Version: 1.0
+" Version: 1.1
 " License: MIT License {{{
 "   Permission is hereby granted, free of charge, to any person obtaining
 "   a copy of this software and associated documentation files (the
@@ -34,6 +34,10 @@ let g:loaded_line2html = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
+
+if !exists('g:line2html_enable_parent_tag')
+  let g:line2html_enable_parent_tag = 1
+endif
 
 " convert line to <table>
 command! -range Line2table :<line1>,<line2>call line2html#makeHtml(<line1>, <line2>, 'table')

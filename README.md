@@ -32,3 +32,10 @@ Install
 ==============
 
 Put this file into $HOME/.vim/plugin directory. Add these settings into .vimrc file.
+
+Options
+==============
+```
+g:line2html_enable_parent_tag
+```
+Insert tag with &lt;table&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;dl&gt; tag. 0: not insert, 1: insert (default)

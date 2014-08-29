@@ -1,9 +1,9 @@
 "
 " File: autoload/line2html/table.vim
 " file created in 2014/08/24 06:52:07.
-" LastUpdated:2014/08/24 07:12:05.
+" LastUpdated:2014/08/29 10:02:59.
 " Author: iNo <wdf7322@yahoo.co.jp>
-" Version: 1.0
+" Version: 1.1
 " License: MIT License {{{
 "   Permission is hereby granted, free of charge, to any person obtaining
 "   a copy of this software and associated documentation files (the
@@ -33,8 +33,11 @@ set cpo&vim
 function! s:getNewLine(l1, l2, currentLine)
   let newLine = ''
 
+  let parent_start_tag = g:line2html_enable_parent_tag ? "<table>\n<tbody>\n" : ""
+  let parent_ent_tag = g:line2html_enable_parent_tag ? "</tbody>\n</table>\n" : ""
+
   if (a:l1 == a:currentLine)
-    let newLine .= "<table>\n<tbody>\n<tr>\n"
+    let newLine .= parent_start_tag . "<tr>\n"
   endif
 
   let line = getline(a:currentLine)
@@ -45,7 +48,7 @@ function! s:getNewLine(l1, l2, currentLine)
   endif
 
   if (a:l2 == a:currentLine)
-    let newLine .= "</tr>\n</tbody>\n</table>\n"
+    let newLine .= "</tr>\n" . parent_ent_tag
   endif
 
   return newLine

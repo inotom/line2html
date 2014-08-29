@@ -1,9 +1,9 @@
 "
 " File: autoload/line2html/li.vim
 " file created in 2014/08/24 07:15:26.
-" LastUpdated:2014/08/24 07:36:20.
+" LastUpdated:2014/08/29 10:02:54.
 " Author: iNo <wdf7322@yahoo.co.jp>
-" Version: 1.0
+" Version: 1.1
 " License: MIT License {{{
 "   Permission is hereby granted, free of charge, to any person obtaining
 "   a copy of this software and associated documentation files (the
@@ -35,7 +35,7 @@ let s:listTag = "ul"
 function! s:getNewLine(l1, l2, currentLine)
   let newLine = ''
 
-  if (a:l1 == a:currentLine)
+  if (a:l1 == a:currentLine && g:line2html_enable_parent_tag)
     let newLine .= "<" . s:listTag . ">\n"
   endif
 
@@ -44,7 +44,7 @@ function! s:getNewLine(l1, l2, currentLine)
     let newLine .= "<li>" . substitute(line, '\v\s+$', '', '') . "</li>\n"
   endif
 
-  if (a:l2 == a:currentLine)
+  if (a:l2 == a:currentLine && g:line2html_enable_parent_tag)
     let newLine .= "</" . s:listTag . ">\n"
   endif
 
